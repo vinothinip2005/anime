@@ -1,0 +1,182 @@
+:root{
+    --bg: #0f1724;
+    --robot: #c7d2fe;
+    --accent: #60a5fa;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    margin:0;
+    background: linear-gradient(180deg, #071324 0%, var(--bg) 100%);
+    display:flex;
+    align-items:flex-end; /* put robot at bottom like walking on ground */
+    justify-content:flex-start;
+    overflow:hidden;
+}
+
+/* Rotate in place animation for limbs */
+@keyframes rotateInPlace {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Walking animation - full width for landscape mode */
+@keyframes walkAcross {
+    0%   { transform: translateX(-200px); }
+    50%  { transform: translateX(calc(100vw - 200px)); }
+    100% { transform: translateX(-200px); }
+}
+
+.stage {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+/* Robot wrapper - moves horizontally */
+.robot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: walkAcross 8s linear infinite;
+}
+
+/* Head (no rotation) */
+.head {
+    width:140px;
+    height:110px;
+    background: linear-gradient(180deg, #1e8644, var(--robot));
+    border-radius:50%;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position: relative;
+}
+
+/* Antenna */
+.antenna {
+    width:4px;
+    height:50px;
+    background:#100303;
+    position:absolute;
+    top:-50px;
+    left:50%;
+    transform:translateX(-50%);
+}
+.antenna::after{
+    content:"";
+    position:absolute;
+    top:-14px;
+    left:50%;
+    transform:translateX(-50%);
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--accent);
+}
+
+/* Eyes */
+.eyes {
+    display:flex;
+    gap:18px;
+}
+.eye {
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#052241;
+}
+
+/* Mouth */
+.mouth {
+    position:absolute;
+    bottom:12px;
+    width:46px;
+    height:8px;
+    border-radius:6px;
+    background: linear-gradient(90deg,#ea1950,#32135f);
+}
+
+/* Body (no rotation) */
+.body {
+    width:160px;
+    height:160px;
+    background: linear-gradient(180deg, #174683 0%, #da5c08 100%);
+    margin:16px auto 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    position: relative;
+}
+
+/* Panel */
+.panel {
+    width:80px;
+    height:90px;
+    border-radius:8px;
+    background: linear-gradient(180deg,#369a1c,#29073c);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+.leds {
+    display:flex;
+    gap:8px;
+}
+.led {
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#9f9611;
+}
+
+/* Arms - rotating in place */
+.arm {
+    position:absolute;
+    top:40px;
+    width:28px;
+    height:110px;
+    background:linear-gradient(180deg,#b7360b,#b921ac);
+    border-radius:18px;
+    transform-origin: center;
+    animation: rotateInPlace 2.5s linear infinite;
+}
+.arm.left { left:-18px; }
+.arm.right { right:-18px; }
+
+.hand {
+    position:absolute;
+    bottom:-10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:linear-gradient(180deg,#2d8fc8,#ffe4bf);
+}
+
+/* Legs - rotating in place */
+.legs {
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-top:18px;
+}
+.leg {
+    width:36px;
+    height:92px;
+    background:linear-gradient(180deg,#0558cd,#0c5fee);
+    border-radius:14px;
+    animation: rotateInPlace 2s linear infinite;
+    transform-origin: center;
+}
+.foot {
+    width:40px;
+    height:20px;
+    background:#d41818;
+    border-radius:10px;
+}
